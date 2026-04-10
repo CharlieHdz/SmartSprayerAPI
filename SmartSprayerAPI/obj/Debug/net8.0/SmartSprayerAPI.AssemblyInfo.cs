@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartSprayerAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b2582ec6576d710151498f294205dba008bc597")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartSprayerAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartSprayerAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

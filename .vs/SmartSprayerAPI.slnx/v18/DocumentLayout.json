@@ -1,37 +1,33 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\",
+  "WorkspaceRootPath": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\smartsprayerapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\smartsprayerapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\smartsprayerapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\controllers\\sensorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\models\\sensordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\models\\sensordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\models\\sensordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\repositories\\sensorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\repositories\\sensorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\repositories\\sensorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\microsoftsoftwaredeveloperassociate\\myownproject\\smartsprayerapi\\smartsprayerapi\\smartsprayerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|c:\\code_and_repos\\repos\\smartsprayerapi\\smartsprayerapi\\smartsprayerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{B3E9DBA5-9A7D-DE81-02CB-59FFE90A1A1A}|SmartSprayerAPI\\SmartSprayerAPI.csproj|solutionrelative:smartsprayerapi\\smartsprayerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
@@ -42,17 +38,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "SmartSprayerAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "SmartSprayerAPI\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-10T02:26:02.196Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "SmartSprayerAPI.http",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.http",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.http",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\SmartSprayerAPI.http",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.http",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.http",
               "RelativeToolTip": "SmartSprayerAPI\\SmartSprayerAPI.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
               "WhenOpened": "2026-04-10T02:05:16.64Z",
               "EditorCaption": ""
@@ -60,23 +69,10 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\WeatherForecast.cs",
-              "RelativeDocumentMoniker": "SmartSprayerAPI\\WeatherForecast.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\WeatherForecast.cs",
-              "RelativeToolTip": "SmartSprayerAPI\\WeatherForecast.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T02:00:19.032Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "SensorController.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\SensorController.cs",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\SensorController.cs",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\Controllers\\SensorController.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\SensorController.cs",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\SensorController.cs",
               "RelativeToolTip": "SmartSprayerAPI\\Controllers\\SensorController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAwwCgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -85,24 +81,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "SensorData.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Models\\SensorData.cs",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Models\\SensorData.cs",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\Models\\SensorData.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Models\\SensorData.cs",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Models\\SensorData.cs",
               "RelativeToolTip": "SmartSprayerAPI\\Models\\SensorData.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T23:56:22.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-09T23:56:22.084Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "SmartSprayerAPI.csproj",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.csproj",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.csproj",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\SmartSprayerAPI.csproj",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.csproj",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\SmartSprayerAPI.csproj",
               "RelativeToolTip": "SmartSprayerAPI\\SmartSprayerAPI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
@@ -110,24 +105,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "SmartSprayerAPI\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "SmartSprayerAPI\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-09T23:54:56.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "SensorRepository.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Repositories\\SensorRepository.cs",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Repositories\\SensorRepository.cs",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\Repositories\\SensorRepository.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Repositories\\SensorRepository.cs",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Repositories\\SensorRepository.cs",
               "RelativeToolTip": "SmartSprayerAPI\\Repositories\\SensorRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -135,11 +117,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Program.cs",
+              "DocumentMoniker": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Program.cs",
               "RelativeDocumentMoniker": "SmartSprayerAPI\\Program.cs",
-              "ToolTip": "C:\\Code_and_Repos\\MicrosoftSoftwareDeveloperAssociate\\MyOwnProject\\SmartSprayerAPI\\SmartSprayerAPI\\Program.cs",
+              "ToolTip": "C:\\Code_and_Repos\\Repos\\SmartSprayerAPI\\SmartSprayerAPI\\Program.cs",
               "RelativeToolTip": "SmartSprayerAPI\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

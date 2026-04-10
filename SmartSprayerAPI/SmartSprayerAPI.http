@@ -10,8 +10,6 @@ PUT {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
 DELETE {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
-
-GET {{SmartSprayerAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
