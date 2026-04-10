@@ -1,0 +1,17 @@
+@SmartSprayerAPI_HostAddress = http://localhost:5080
+
+POST {{SmartSprayerAPI_HostAddress}}/sensor-data/
+
+GET {{SmartSprayerAPI_HostAddress}}/sensor-data/
+
+GET {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
+
+PUT {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
+
+DELETE {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
+
+
+GET {{SmartSprayerAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
