@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmartSprayerAPI.Controllers;
 using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Repositories;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SmartSprayerAPI.Controllers
 {
@@ -59,6 +61,13 @@ namespace SmartSprayerAPI.Controllers
             existing.Pressure = updatedData.Pressure;
             existing.Timestamp = updatedData.Timestamp;
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _logger.LogInformation("Received sensor data from {deviceId}", existing.DeviceId);
+
             return Ok(existing);
         }
 
@@ -80,6 +89,12 @@ namespace SmartSprayerAPI.Controllers
             SensorRepository.Data.Remove(existing);
 
             return Ok(new { message = $"Device {deviceId} deleted" });
+        }
+
+        private readonly ILogger<SensorController> _logger;
+        public SensorController(ILogger<SensorController> logger)
+        {
+            _logger = logger;
         }
     }
 }
