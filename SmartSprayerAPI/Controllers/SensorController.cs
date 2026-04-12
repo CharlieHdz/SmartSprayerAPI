@@ -1,27 +1,43 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SmartSprayerAPI.Controllers;
 using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Repositories;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using SmartSprayerAPI.Services;
 
 namespace SmartSprayerAPI.Controllers
 {
-    [ApiController] // Means = API REST
-    [Route("sensor-data")] // Base URL
+    [ApiController]         // Means = API REST
+    [Route("sensor-data")]  // Base URL
     public class SensorController : ControllerBase
     {
+        private readonly ILogger<SensorController> _logger;
+        private readonly SensorService _service;
+
+        public SensorController(SensorService service, ILogger<SensorController> logger)
+        {
+            _service = service;
+            _logger = logger;
+        }
+
         [HttpPost] // Receives Data
         public IActionResult PostSensorData([FromBody] SensorData sensorData)
         {
-            SensorRepository.Data.Add(sensorData);
-            return Ok(new { message = "Data received" });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _service.Add(sensorData);
+
+            _logger.LogInformation("Data received from {deviceId}", sensorData.DeviceId);
+
+            return Ok(sensorData);
         }
 
         [HttpGet] // Returns Data
         public IActionResult GetSensorData()
         {
-            return Ok(SensorRepository.Data);
+            return Ok(_service.GetAll());
         }
 
         [HttpGet("{deviceId}")]
@@ -32,7 +48,7 @@ namespace SmartSprayerAPI.Controllers
                 return BadRequest("deviceId is required");
             }
 
-            var result = SensorRepository.Data.Where(x => x.DeviceId == deviceId).ToList(); // Using Language Intrated Query (LINQ)
+            var result = _service.GetByServiceId(deviceId);
 
             if (result.Count == 0)
             {
@@ -45,33 +61,29 @@ namespace SmartSprayerAPI.Controllers
         [HttpPut("{deviceId}")]
         public IActionResult UpdateSensorData(string deviceId, [FromBody] SensorData updatedData)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (string.IsNullOrEmpty(deviceId))
             {
                 return BadRequest("deviceId is required");
             }
 
-            var existing = SensorRepository.Data.FirstOrDefault(x => x.DeviceId == deviceId); //Look for a single element ID
+            var existing = _service.Update(deviceId, updatedData);
 
             if (existing == null) // If no data found
             {
                 return NotFound($"Device {deviceId} not found");
             }
 
-            existing.Temperature = updatedData.Temperature;
-            existing.Pressure = updatedData.Pressure;
-            existing.Timestamp = updatedData.Timestamp;
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             _logger.LogInformation("Received sensor data from {deviceId}", existing.DeviceId);
 
-            return Ok(existing);
+            return Ok(updatedData);
         }
 
-        [HttpDelete("{deviceID}")]
+        [HttpDelete("{deviceId}")]
         public IActionResult DeleteSensorData(string deviceId)
         {
             if (string.IsNullOrEmpty(deviceId))
@@ -79,22 +91,14 @@ namespace SmartSprayerAPI.Controllers
                 return BadRequest("deviceId is required");
             }
 
-            var existing = SensorRepository.Data.FirstOrDefault(x => x.DeviceId == deviceId);
+            var deleted = _service.Delete(deviceId);
 
-            if (existing == null)
+            if (!deleted)
             {
                 return NotFound($"Device {deviceId} not found");
             }
 
-            SensorRepository.Data.Remove(existing);
-
             return Ok(new { message = $"Device {deviceId} deleted" });
-        }
-
-        private readonly ILogger<SensorController> _logger;
-        public SensorController(ILogger<SensorController> logger)
-        {
-            _logger = logger;
         }
     }
 }
