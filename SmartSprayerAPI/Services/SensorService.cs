@@ -1,4 +1,4 @@
-using SmartSprayerAPI.Repositories;
+﻿using SmartSprayerAPI.Repositories;
 using SmartSprayerAPI.Models;
 
 namespace SmartSprayerAPI.Services
@@ -16,6 +16,8 @@ namespace SmartSprayerAPI.Services
             data.Timestamp = DateTime.UtcNow;
 
             SensorRepository.Data.Add(data);
+
+            EvaluateRules(data);
         }
 
         public SensorData Update(string deviceId, SensorData updatedData)
@@ -46,6 +48,41 @@ namespace SmartSprayerAPI.Services
             SensorRepository.Data.Remove(existing);
 
             return true;
+        }
+
+        public List<Alert> GetAlerts()
+        {
+            return SensorRepository.Alerts;
+        }
+
+        private void CreateAlert(SensorData data, string message, string severity)
+        {
+            var alert = new Alert
+            {
+                DeviceId = data.DeviceId,
+                Message = message,
+                Severity = severity,
+                Timestamp = DateTime.UtcNow
+            };
+
+            SensorRepository.Alerts.Add(alert);
+        }
+
+        private void EvaluateRules(SensorData data)
+        {
+            if (data.Pressure > 150)
+            {
+                CreateAlert(data, "Critical pressure detected", "Critical");
+            }
+            else if (data.Pressure > 100)
+            {
+                CreateAlert(data, "High pressure detected", "High");
+            }
+
+            if (data.Temperature > 90)
+            {
+                CreateAlert(data, "High temperature detected", "High");
+            }
         }
     }
 }

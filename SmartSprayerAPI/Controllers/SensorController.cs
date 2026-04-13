@@ -100,5 +100,12 @@ namespace SmartSprayerAPI.Controllers
 
             return Ok(new { message = $"Device {deviceId} deleted" });
         }
+
+        /// Alerts data
+        [HttpGet("alerts")]
+        public IActionResult GetAlerts()
+        {
+            return Ok(_service.GetAlerts());
+        }
     }
 }
