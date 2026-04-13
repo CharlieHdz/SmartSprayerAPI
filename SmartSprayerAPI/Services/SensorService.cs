@@ -1,4 +1,4 @@
-﻿using SmartSprayerAPI.Repositories;
+using SmartSprayerAPI.Repositories;
 using SmartSprayerAPI.Models;
 
 namespace SmartSprayerAPI.Services
@@ -13,6 +13,8 @@ namespace SmartSprayerAPI.Services
         }
         public void Add(SensorData data)
         {
+            data.Timestamp = DateTime.UtcNow;
+
             SensorRepository.Data.Add(data);
         }
 
