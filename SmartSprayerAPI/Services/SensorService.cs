@@ -50,13 +50,20 @@ namespace SmartSprayerAPI.Services
             return true;
         }
 
-        public List<Alert> GetAlerts()
+        public List<Alert> GetAlertsByDevice(string deviceId)
         {
-            return SensorRepository.Alerts;
+            return SensorRepository.Alerts.Where(a => a.DeviceId == deviceId).ToList();
         }
 
         private void CreateAlert(SensorData data, string message, string severity)
         {
+            var recentAlert = SensorRepository.Alerts.LastOrDefault(a => a.DeviceId == data.DeviceId && a.Message == message);
+
+            if(recentAlert != null && (DateTime.UtcNow - recentAlert.Timestamp).TotalSeconds < 30)
+            {
+                return; // Debouncing logic, post a new DTC alert every 30 seconds
+            }
+
             var alert = new Alert
             {
                 DeviceId = data.DeviceId,
@@ -70,19 +77,22 @@ namespace SmartSprayerAPI.Services
 
         private void EvaluateRules(SensorData data)
         {
-            if (data.Pressure > 150)
-            {
-                CreateAlert(data, "Critical pressure detected", "Critical");
-            }
-            else if (data.Pressure > 100)
-            {
-                CreateAlert(data, "High pressure detected", "High");
-            }
+            CheckPressure(data);
+            CheckTemperature(data);
+        }
 
+        private void CheckPressure(SensorData data)
+        {
+            if (data.Pressure > 150)
+                CreateAlert(data, "Critical pressure detected", "Critical");
+            else if (data.Pressure > 100)
+                CreateAlert(data, "High pressure detected", "High");
+        }
+
+        private void CheckTemperature(SensorData data)
+        {
             if (data.Temperature > 90)
-            {
                 CreateAlert(data, "High temperature detected", "High");
-            }
         }
     }
 }

@@ -102,10 +102,17 @@ namespace SmartSprayerAPI.Controllers
         }
 
         /// Alerts data
-        [HttpGet("alerts")]
-        public IActionResult GetAlerts()
+        [HttpGet("{deviceId}/alerts")]
+        public IActionResult GetAlertsByDevice(string deviceId)
         {
-            return Ok(_service.GetAlerts());
+            var alerts = _service.GetAlertsByDevice(deviceId);
+
+            if (!alerts.Any())
+            {
+                return NotFound($"No device with {deviceId} ID found");
+            }
+
+            return Ok(alerts);
         }
     }
 }
