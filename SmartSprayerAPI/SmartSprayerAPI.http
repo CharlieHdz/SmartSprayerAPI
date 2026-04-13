@@ -4,13 +4,13 @@ POST {{SmartSprayerAPI_HostAddress}}/sensor-data/
 
 GET {{SmartSprayerAPI_HostAddress}}/sensor-data/
 
-GET {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
+GET {{SmartSprayerAPI_HostAddress}}/sensor-data/device/{deviceId}
 
 PUT {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
 DELETE {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
-GET {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}/alerts
+GET {{SmartSprayerAPI_HostAddress}}/sensor-data/alerts/{deviceId}
 
 Accept: application/json
 

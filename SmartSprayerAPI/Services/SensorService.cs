@@ -1,28 +1,36 @@
-﻿using SmartSprayerAPI.Repositories;
-using SmartSprayerAPI.Models;
+﻿using SmartSprayerAPI.Models;
+using SmartSprayerAPI.Data;
 
 namespace SmartSprayerAPI.Services
 {
     public class SensorService
     {
-        public List<SensorData> GetAll() => SensorRepository.Data;
+        private readonly AppDbContext _context;
 
-        public List<SensorData> GetByServiceId(string deviceId)
+        public SensorService(AppDbContext context)
         {
-            return SensorRepository.Data.Where(x => x.DeviceId == deviceId).ToList();
+            _context = context;
+        }
+
+        public List<SensorData> GetAll() => _context.SensorData.ToList();
+
+        public List<SensorData> GetByDeviceId(string deviceId)
+        {
+            return _context.SensorData.Where(x => x.DeviceId == deviceId).ToList();
         }
         public void Add(SensorData data)
         {
             data.Timestamp = DateTime.UtcNow;
 
-            SensorRepository.Data.Add(data);
+            _context.SensorData.Add(data);
+            _context.SaveChanges();
 
             EvaluateRules(data);
         }
 
-        public SensorData Update(string deviceId, SensorData updatedData)
+        public SensorData Update(int id, SensorData updatedData)
         {
-            var existing = SensorRepository.Data.FirstOrDefault(x => x.DeviceId == deviceId);
+            var existing = _context.SensorData.FirstOrDefault(x => x.Id == id);
 
             if (existing == null)
             {
@@ -33,33 +41,38 @@ namespace SmartSprayerAPI.Services
             existing.Pressure = updatedData.Pressure;
             existing.Timestamp = DateTime.UtcNow;
 
+            _context.SaveChanges();
+
             return existing;
         }
 
-        public bool Delete(string deviceId)
+        public bool Delete(int id)
         {
-            var existing = SensorRepository.Data.FirstOrDefault(x => x.DeviceId == deviceId);
+            var existing = _context.SensorData.FirstOrDefault(x => x.Id == id);
 
             if (existing == null)
             {
                 return false;
             }
 
-            SensorRepository.Data.Remove(existing);
+            _context.SensorData.Remove(existing);
+            _context.SaveChanges();
 
             return true;
         }
 
         public List<Alert> GetAlertsByDevice(string deviceId)
         {
-            return SensorRepository.Alerts.Where(a => a.DeviceId == deviceId).ToList();
+            return _context.Alerts.Where(a => a.DeviceId == deviceId).ToList();
         }
 
         private void CreateAlert(SensorData data, string message, string severity)
         {
-            var recentAlert = SensorRepository.Alerts.LastOrDefault(a => a.DeviceId == data.DeviceId && a.Message == message);
+            var recentAlert = _context.Alerts.Where(a => a.DeviceId == data.DeviceId && a.Message == message)
+                                             .OrderByDescending(a => a.Timestamp)
+                                             .FirstOrDefault();
 
-            if(recentAlert != null && (DateTime.UtcNow - recentAlert.Timestamp).TotalSeconds < 30)
+            if (recentAlert != null && (DateTime.UtcNow - recentAlert.Timestamp).TotalSeconds < 30)
             {
                 return; // Debouncing logic, post a new DTC alert every 30 seconds
             }
@@ -72,7 +85,8 @@ namespace SmartSprayerAPI.Services
                 Timestamp = DateTime.UtcNow
             };
 
-            SensorRepository.Alerts.Add(alert);
+            _context.Alerts.Add(alert);
+            _context.SaveChanges();
         }
 
         private void EvaluateRules(SensorData data)

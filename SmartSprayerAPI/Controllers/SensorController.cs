@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SmartSprayerAPI.Models;
-using SmartSprayerAPI.Repositories;
 using SmartSprayerAPI.Services;
 
 namespace SmartSprayerAPI.Controllers
@@ -40,7 +40,7 @@ namespace SmartSprayerAPI.Controllers
             return Ok(_service.GetAll());
         }
 
-        [HttpGet("{deviceId}")]
+        [HttpGet("device/{deviceId}")]
         public IActionResult GetByDeviceId(string deviceId)
         {
             if (string.IsNullOrEmpty(deviceId))
@@ -48,7 +48,7 @@ namespace SmartSprayerAPI.Controllers
                 return BadRequest("deviceId is required");
             }
 
-            var result = _service.GetByServiceId(deviceId);
+            var result = _service.GetByDeviceId(deviceId);
 
             if (result.Count == 0)
             {
@@ -58,51 +58,41 @@ namespace SmartSprayerAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{deviceId}")]
-        public IActionResult UpdateSensorData(string deviceId, [FromBody] SensorData updatedData)
+        [HttpPut("{id}")]
+        public IActionResult UpdateSensorData(int id, [FromBody] SensorData updatedData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (string.IsNullOrEmpty(deviceId))
-            {
-                return BadRequest("deviceId is required");
-            }
-
-            var existing = _service.Update(deviceId, updatedData);
+            var existing = _service.Update(id, updatedData);
 
             if (existing == null) // If no data found
             {
-                return NotFound($"Device {deviceId} not found");
+                return NotFound($"Device id: {id} not found");
             }
 
-            _logger.LogInformation("Received sensor data from {deviceId}", existing.DeviceId);
+            _logger.LogInformation("Received sensor data from {id}", existing.DeviceId);
 
             return Ok(updatedData);
         }
 
-        [HttpDelete("{deviceId}")]
-        public IActionResult DeleteSensorData(string deviceId)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteSensorData(int id)
         {
-            if (string.IsNullOrEmpty(deviceId))
-            {
-                return BadRequest("deviceId is required");
-            }
-
-            var deleted = _service.Delete(deviceId);
+            var deleted = _service.Delete(id);
 
             if (!deleted)
             {
-                return NotFound($"Device {deviceId} not found");
+                return NotFound($"Device {id} not found");
             }
 
-            return Ok(new { message = $"Device {deviceId} deleted" });
+            return Ok(new { message = $"Device {id} deleted" });
         }
 
         /// Alerts data
-        [HttpGet("{deviceId}/alerts")]
+        [HttpGet("alerts/{deviceId}")]
         public IActionResult GetAlertsByDevice(string deviceId)
         {
             var alerts = _service.GetAlertsByDevice(deviceId);

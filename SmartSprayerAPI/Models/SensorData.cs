@@ -4,6 +4,9 @@ namespace SmartSprayerAPI.Models
 {
     public class SensorData
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required] //Data structure that the API will handle
         public string DeviceId { get; set; }
 
