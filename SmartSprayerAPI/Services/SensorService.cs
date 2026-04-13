@@ -1,5 +1,6 @@
 ﻿using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace SmartSprayerAPI.Services
 {
@@ -12,25 +13,36 @@ namespace SmartSprayerAPI.Services
             _context = context;
         }
 
-        public List<SensorData> GetAll() => _context.SensorData.ToList();
-
-        public List<SensorData> GetByDeviceId(string deviceId)
+        public async Task<List<SensorData>> GetAll()
         {
-            return _context.SensorData.Where(x => x.DeviceId == deviceId).ToList();
+            return await _context.SensorData.ToListAsync();
         }
-        public void Add(SensorData data)
+
+        public async Task<List<SensorData>> GetByDeviceId(string deviceId)
+        {
+            return await _context.SensorData.Where(x => x.DeviceId == deviceId).ToListAsync();
+        }
+
+        public async Task<SensorData?> GetLatestByDevice(string deviceId)
+        {
+            return await _context.SensorData.Where(x => x.DeviceId == deviceId)
+                                            .OrderByDescending(x => x.Timestamp)
+                                            .FirstOrDefaultAsync();
+        }
+
+        public async Task Add(SensorData data)
         {
             data.Timestamp = DateTime.UtcNow;
 
-            _context.SensorData.Add(data);
-            _context.SaveChanges();
+            await _context.SensorData.AddAsync(data);
+            await _context.SaveChangesAsync();
 
-            EvaluateRules(data);
+            await EvaluateRules(data);
         }
 
-        public SensorData Update(int id, SensorData updatedData)
+        public async Task<SensorData?> Update(int id, SensorData updatedData)
         {
-            var existing = _context.SensorData.FirstOrDefault(x => x.Id == id);
+            var existing = await _context.SensorData.FindAsync(id);
 
             if (existing == null)
             {
@@ -41,14 +53,14 @@ namespace SmartSprayerAPI.Services
             existing.Pressure = updatedData.Pressure;
             existing.Timestamp = DateTime.UtcNow;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return existing;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            var existing = _context.SensorData.FirstOrDefault(x => x.Id == id);
+            var existing = await _context.SensorData.FindAsync(id);
 
             if (existing == null)
             {
@@ -56,23 +68,25 @@ namespace SmartSprayerAPI.Services
             }
 
             _context.SensorData.Remove(existing);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
-        public List<Alert> GetAlertsByDevice(string deviceId)
+        public async Task<List<Alert>> GetAlertsByDevice(string deviceId)
         {
-            return _context.Alerts.Where(a => a.DeviceId == deviceId).ToList();
+            return await _context.Alerts.Where(a => a.DeviceId == deviceId).ToListAsync();
         }
 
-        private void CreateAlert(SensorData data, string message, string severity)
+        private async Task CreateAlert(SensorData data, string message, string severity)
         {
-            var recentAlert = _context.Alerts.Where(a => a.DeviceId == data.DeviceId && a.Message == message)
-                                             .OrderByDescending(a => a.Timestamp)
-                                             .FirstOrDefault();
+            var cutoff = DateTime.UtcNow.AddSeconds(-30);
 
-            if (recentAlert != null && (DateTime.UtcNow - recentAlert.Timestamp).TotalSeconds < 30)
+            var recentAlert = await _context.Alerts.Where(a => a.DeviceId == data.DeviceId && a.Message == message && a.Timestamp >= cutoff)
+                                                   .OrderByDescending(a => a.Timestamp)
+                                                   .FirstOrDefaultAsync();
+
+            if (recentAlert != null)
             {
                 return; // Debouncing logic, post a new DTC alert every 30 seconds
             }
@@ -85,28 +99,28 @@ namespace SmartSprayerAPI.Services
                 Timestamp = DateTime.UtcNow
             };
 
-            _context.Alerts.Add(alert);
-            _context.SaveChanges();
+            await _context.Alerts.AddAsync(alert);
+            await _context.SaveChangesAsync();
         }
 
-        private void EvaluateRules(SensorData data)
+        private async Task EvaluateRules(SensorData data)
         {
-            CheckPressure(data);
-            CheckTemperature(data);
+            await CheckPressure(data);
+            await CheckTemperature(data);
         }
 
-        private void CheckPressure(SensorData data)
+        private async Task CheckPressure(SensorData data)
         {
             if (data.Pressure > 150)
-                CreateAlert(data, "Critical pressure detected", "Critical");
+                await CreateAlert(data, "Critical pressure detected", "Critical");
             else if (data.Pressure > 100)
-                CreateAlert(data, "High pressure detected", "High");
+                await CreateAlert(data, "High pressure detected", "High");
         }
 
-        private void CheckTemperature(SensorData data)
+        private async Task CheckTemperature(SensorData data)
         {
             if (data.Temperature > 90)
-                CreateAlert(data, "High temperature detected", "High");
+                await CreateAlert(data, "High temperature detected", "High");
         }
     }
 }

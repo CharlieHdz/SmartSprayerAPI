@@ -6,6 +6,8 @@ GET {{SmartSprayerAPI_HostAddress}}/sensor-data/
 
 GET {{SmartSprayerAPI_HostAddress}}/sensor-data/device/{deviceId}
 
+GET {{SmartSprayerAPI_HostAddress}}/sensor-data/latest/{deviceId}
+
 PUT {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
 DELETE {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}

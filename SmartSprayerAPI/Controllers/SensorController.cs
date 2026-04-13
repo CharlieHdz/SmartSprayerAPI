@@ -20,14 +20,14 @@ namespace SmartSprayerAPI.Controllers
         }
 
         [HttpPost] // Receives Data
-        public IActionResult PostSensorData([FromBody] SensorData sensorData)
+        public async Task<IActionResult> PostSensorData([FromBody] SensorData sensorData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Add(sensorData);
+            await _service.Add(sensorData);
 
             _logger.LogInformation("Data received from {deviceId}", sensorData.DeviceId);
 
@@ -35,20 +35,20 @@ namespace SmartSprayerAPI.Controllers
         }
 
         [HttpGet] // Returns Data
-        public IActionResult GetSensorData()
+        public async Task<IActionResult> GetSensorData()
         {
-            return Ok(_service.GetAll());
+            return Ok(await _service.GetAll());
         }
 
         [HttpGet("device/{deviceId}")]
-        public IActionResult GetByDeviceId(string deviceId)
+        public async Task<IActionResult> GetByDeviceId(string deviceId)
         {
             if (string.IsNullOrEmpty(deviceId))
             {
                 return BadRequest("deviceId is required");
             }
 
-            var result = _service.GetByDeviceId(deviceId);
+            var result = await _service.GetByDeviceId(deviceId);
 
             if (result.Count == 0)
             {
@@ -58,30 +58,41 @@ namespace SmartSprayerAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("latest/{deviceId}")]
+        public async Task<IActionResult> GetLatest(string deviceId)
+        {
+            var latest = await _service.GetLatestByDevice(deviceId);
+
+            if (latest == null)
+                return NotFound();
+
+            return Ok(latest);
+        }
+
         [HttpPut("{id}")]
-        public IActionResult UpdateSensorData(int id, [FromBody] SensorData updatedData)
+        public async Task<IActionResult> UpdateSensorData(int id, [FromBody] SensorData updatedData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var existing = _service.Update(id, updatedData);
+            var existing = await _service.Update(id, updatedData);
 
             if (existing == null) // If no data found
             {
                 return NotFound($"Device id: {id} not found");
             }
 
-            _logger.LogInformation("Received sensor data from {id}", existing.DeviceId);
+            _logger.LogInformation("Updated sensor data for Id {id}", id);
 
-            return Ok(updatedData);
+            return Ok(existing);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteSensorData(int id)
+        public async Task<IActionResult> DeleteSensorData(int id)
         {
-            var deleted = _service.Delete(id);
+            var deleted = await _service.Delete(id);
 
             if (!deleted)
             {
@@ -93,13 +104,13 @@ namespace SmartSprayerAPI.Controllers
 
         /// Alerts data
         [HttpGet("alerts/{deviceId}")]
-        public IActionResult GetAlertsByDevice(string deviceId)
+        public async Task<IActionResult> GetAlertsByDevice(string deviceId)
         {
-            var alerts = _service.GetAlertsByDevice(deviceId);
+            var alerts = await _service.GetAlertsByDevice(deviceId);
 
             if (!alerts.Any())
             {
-                return NotFound($"No device with {deviceId} ID found");
+                return NotFound($"No alerts found for device ID: {deviceId}");
             }
 
             return Ok(alerts);
