@@ -13,19 +13,19 @@ builder.Services.AddScoped<ISensorService, SensorService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+// Currently exposing Swagger to production for testing purposes with Azure App Service:
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapGet("/", () => "SmartSprayer API is running 🚀");
-
+app.MapHealthChecks("/health");
 app.UseExceptionHandler("/error");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
