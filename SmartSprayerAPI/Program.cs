@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using SmartSprayerAPI.Data;
 using SmartSprayerAPI.Services;
@@ -15,6 +16,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
+builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+{
+    options.Authority = "https://demo.identityserver.io";
+    options.Audience = "api";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +35,7 @@ app.UseExceptionHandler("/error");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

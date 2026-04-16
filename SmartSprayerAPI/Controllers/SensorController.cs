@@ -7,9 +7,11 @@ using SmartSprayerAPI.Mappings;
 using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Interfaces;
 using SmartSprayerAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmartSprayerAPI.Controllers
 {
+    [Authorize]             // Default all endpoints to be protected
     [ApiController]         // Means = API REST
     [Route("sensor-data")]  // Base URL
     public class SensorController : ControllerBase
@@ -45,6 +47,7 @@ namespace SmartSprayerAPI.Controllers
             return Ok(model);
         }
 
+        [AllowAnonymous]
         [HttpGet] // Returns Data
         public async Task<IActionResult> GetSensorData()
         {
@@ -55,6 +58,7 @@ namespace SmartSprayerAPI.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpGet("device/{deviceId}")]
         public async Task<IActionResult> GetByDeviceId(string deviceId)
         {
@@ -75,6 +79,7 @@ namespace SmartSprayerAPI.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpGet("latest/{deviceId}")]
         public async Task<IActionResult> GetLatest(string deviceId)
         {
@@ -126,6 +131,7 @@ namespace SmartSprayerAPI.Controllers
         }
 
         /// Alerts data
+        [AllowAnonymous]
         [HttpGet("alerts/{deviceId}")]
         public async Task<IActionResult> GetAlertsByDevice(string deviceId)
         {
