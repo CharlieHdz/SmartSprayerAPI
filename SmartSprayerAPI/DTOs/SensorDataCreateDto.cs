@@ -1,9 +1,15 @@
-﻿namespace SmartSprayerAPI.DTOs
+using System.ComponentModel.DataAnnotations;
+
+namespace SmartSprayerAPI.DTOs
 {
     public class SensorDataCreateDto
     {
-        public string DeviceId { get; set; }
+        [Required]
+        
+        [Range(-50, 150)]
         public double Temperature { get; set; }
+
+        [Range(0, 500)]
         public double Pressure { get; set; }
     }
 }
