@@ -1,18 +1,22 @@
-﻿using SmartSprayerAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using SmartSprayerAPI.Data;
 using SmartSprayerAPI.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using SmartSprayerAPI.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SmartSprayerAPI.Services
 {
     public class SensorService : ISensorService
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<SensorService> _logger;
 
-        public SensorService(AppDbContext context)
+        public SensorService(AppDbContext context, ILogger<SensorService> logger)
         {
             _context = context;
+            _logger = logger;
         }
+
 
         public async Task<List<SensorData>> GetAll()
         {
@@ -38,6 +42,8 @@ namespace SmartSprayerAPI.Services
             await _context.SensorData.AddAsync(data);
             await _context.SaveChangesAsync();
 
+            _logger.LogInformation("Sensor data stored for {deviceId} at {time}", data.DeviceId, data.Timestamp);
+
             await EvaluateRules(data);
         }
 
@@ -49,6 +55,8 @@ namespace SmartSprayerAPI.Services
             {
                 return null;
             }
+
+            _logger.LogInformation($"Updated Temperature from {existing.Temperature} to {updatedData.Temperature} and Pressure from {existing.Pressure} to {updatedData.Pressure}");
 
             existing.Temperature = updatedData.Temperature;
             existing.Pressure = updatedData.Pressure;
@@ -70,6 +78,8 @@ namespace SmartSprayerAPI.Services
 
             _context.SensorData.Remove(existing);
             await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Deleted element with ID: {id} from dbc");
 
             return true;
         }
