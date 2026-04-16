@@ -25,6 +25,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => "SmartSprayer API is running 🚀");
 
+app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
