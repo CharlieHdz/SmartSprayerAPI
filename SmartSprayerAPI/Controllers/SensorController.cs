@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SmartSprayerAPI.DTOs;
+using SmartSprayerAPI.Mappings;
 using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Interfaces;
 using SmartSprayerAPI.Services;
@@ -49,14 +50,7 @@ namespace SmartSprayerAPI.Controllers
         {
             var data = await _service.GetAll();
 
-            var response = data.Select(x => new SensorDataResponseDto
-            {
-                Id = x.Id,
-                DeviceId = x.DeviceId,
-                Temperature = x.Temperature,
-                Pressure = x.Pressure,
-                Timestamp = x.Timestamp.Value
-            }).ToList();
+            var response = data.Select(SensorMapper.ToDto).ToList();
 
             return Ok(response);
         }
@@ -76,14 +70,7 @@ namespace SmartSprayerAPI.Controllers
                 return NotFound($"No data was found for devidceId: {deviceId}");
             }
 
-            var response = result.Select(x => new SensorDataResponseDto
-            {
-                Id = x.Id,
-                DeviceId = x.DeviceId,
-                Temperature = x.Temperature,
-                Pressure = x.Pressure,
-                Timestamp = x.Timestamp.Value
-            }).ToList();
+            var response = result.Select(SensorMapper.ToDto).ToList();
 
             return Ok(response);
         }
@@ -149,13 +136,7 @@ namespace SmartSprayerAPI.Controllers
                 return NotFound($"No alerts found for device ID: {deviceId}");
             }
 
-            var response = alerts.Select(x => new AlertResponseDto
-            {
-                DeviceId = x.DeviceId,
-                Severity = x.Severity,
-                Message = x.Message,
-                Timestamp = x.Timestamp.Value
-            }).ToList();
+            var response = alerts.Select(AlertMapper.ToDto).ToList();
 
             return Ok(response);
         }
