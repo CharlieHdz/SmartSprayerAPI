@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using SmartSprayerAPI.Data;
-using SmartSprayerAPI.Services;
 using SmartSprayerAPI.Interfaces;
+using SmartSprayerAPI.Services;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +33,27 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapGet("/", () => "SmartSprayer API is running 🚀");
-app.MapHealthChecks("/health");
+
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        var result = JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(e => new
+            {
+                name = e.Key,
+                status = e.Value.Status.ToString(),
+                error = e.Value.Exception?.Message
+            })
+        });
+
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync(result);
+    }
+});
+
 app.UseExceptionHandler("/error");
 
 app.UseHttpsRedirection();
