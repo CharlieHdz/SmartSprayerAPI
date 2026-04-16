@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SmartSprayerAPI.DTOs;
 using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Services;
 
@@ -20,24 +22,42 @@ namespace SmartSprayerAPI.Controllers
         }
 
         [HttpPost] // Receives Data
-        public async Task<IActionResult> PostSensorData([FromBody] SensorData sensorData)
+        public async Task<IActionResult> PostSensorData([FromBody] SensorDataCreateDto sensorDataDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _service.Add(sensorData);
+            var model = new SensorData
+            {
+                DeviceId = sensorDataDto.DeviceId,
+                Temperature = sensorDataDto.Temperature,
+                Pressure = sensorDataDto.Pressure
+            };
 
-            _logger.LogInformation("Data received from {deviceId}", sensorData.DeviceId);
+            await _service.Add(model);
 
-            return Ok(sensorData);
+            _logger.LogInformation("Data received from {deviceId}", model.DeviceId);
+
+            return Ok(model);
         }
 
         [HttpGet] // Returns Data
         public async Task<IActionResult> GetSensorData()
         {
-            return Ok(await _service.GetAll());
+            var data = await _service.GetAll();
+
+            var response = data.Select(x => new SensorDataResponseDto
+            {
+                Id = x.Id,
+                DeviceId = x.DeviceId,
+                Temperature = x.Temperature,
+                Pressure = x.Pressure,
+                Timestamp = x.Timestamp.Value
+            }).ToList();
+
+            return Ok(response);
         }
 
         [HttpGet("device/{deviceId}")]
@@ -55,7 +75,16 @@ namespace SmartSprayerAPI.Controllers
                 return NotFound($"No data was found for devidceId: {deviceId}");
             }
 
-            return Ok(result);
+            var response = result.Select(x => new SensorDataResponseDto
+            {
+                Id = x.Id,
+                DeviceId = x.DeviceId,
+                Temperature = x.Temperature,
+                Pressure = x.Pressure,
+                Timestamp = x.Timestamp.Value
+            }).ToList();
+
+            return Ok(response);
         }
 
         [HttpGet("latest/{deviceId}")]
@@ -70,14 +99,20 @@ namespace SmartSprayerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSensorData(int id, [FromBody] SensorData updatedData)
+        public async Task<IActionResult> UpdateSensorData(int id, [FromBody] SensorDataUpdateDto updatedDataUpdateDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var existing = await _service.Update(id, updatedData);
+            var model = new SensorData
+            {
+                Temperature = updatedDataUpdateDto.Temperature,
+                Pressure = updatedDataUpdateDto.Pressure
+            };
+
+            var existing = await _service.Update(id, model);
 
             if (existing == null) // If no data found
             {
@@ -113,7 +148,15 @@ namespace SmartSprayerAPI.Controllers
                 return NotFound($"No alerts found for device ID: {deviceId}");
             }
 
-            return Ok(alerts);
+            var response = alerts.Select(x => new AlertResponseDto
+            {
+                DeviceId = x.DeviceId,
+                Severity = x.Severity,
+                Message = x.Message,
+                Timestamp = x.Timestamp.Value
+            }).ToList();
+
+            return Ok(response);
         }
     }
 }
