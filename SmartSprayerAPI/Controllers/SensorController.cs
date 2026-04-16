@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SmartSprayerAPI.DTOs;
 using SmartSprayerAPI.Models;
+using SmartSprayerAPI.Interfaces;
 using SmartSprayerAPI.Services;
 
 namespace SmartSprayerAPI.Controllers
@@ -13,9 +14,9 @@ namespace SmartSprayerAPI.Controllers
     public class SensorController : ControllerBase
     {
         private readonly ILogger<SensorController> _logger;
-        private readonly SensorService _service;
+        private readonly ISensorService _service;
 
-        public SensorController(SensorService service, ILogger<SensorController> logger)
+        public SensorController(ISensorService service, ILogger<SensorController> logger)
         {
             _service = service;
             _logger = logger;

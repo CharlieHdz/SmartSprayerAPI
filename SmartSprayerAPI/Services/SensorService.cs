@@ -1,10 +1,11 @@
 ﻿using SmartSprayerAPI.Models;
 using SmartSprayerAPI.Data;
+using SmartSprayerAPI.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace SmartSprayerAPI.Services
 {
-    public class SensorService
+    public class SensorService : ISensorService
     {
         private readonly AppDbContext _context;
 
