@@ -1,10 +1,11 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SmartSprayerAPI.DTOs
 {
     public class SensorDataCreateDto
     {
         [Required]
+        public string? DeviceId { get; set; }
         
         [Range(-50, 150)]
         public double Temperature { get; set; }

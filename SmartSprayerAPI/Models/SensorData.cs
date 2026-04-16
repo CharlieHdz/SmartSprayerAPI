@@ -8,7 +8,7 @@ namespace SmartSprayerAPI.Models
         public int Id { get; set; }
 
         [Required] //Data structure that the API will handle
-        public string DeviceId { get; set; }
+        public string? DeviceId { get; set; }
 
         [Range(-50, 150)]
         public double Temperature { get; set; }
