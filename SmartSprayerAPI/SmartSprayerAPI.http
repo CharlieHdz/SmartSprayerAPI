@@ -14,6 +14,8 @@ DELETE {{SmartSprayerAPI_HostAddress}}/sensor-data/{deviceId}
 
 GET {{SmartSprayerAPI_HostAddress}}/sensor-data/alerts/{deviceId}
 
+GET {{SmartSprayerAPI_HostAddress}}/health
+
 Accept: application/json
 
 ###
